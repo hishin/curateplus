@@ -1,0 +1,550 @@
+Top 10 Unsolved Research Problems – 2025   
+
+DRAFT 
+
+Instructions: 
+
+List the top 1-2 bold / ambitious unsolved research problems that your team is working on or should be working on. These research problems should be informed by the Adobe mission, goals and strategies. The solution to these problems should lead to breakthroughs and transformative technological innovations. 
+
+For each research problem, please share the following information as well as links to additional information, if applicable: 
+
+Your name 
+
+What the problem is 
+
+What solutions to the problem are being explored 
+
+What potential impact will a solution to this problem have on the Adobe business 
+
+What is the current state of the research exploration 
+
+How urgent is it to solve this problem, and what can be done to expedite the work 
+
+Please keep your initial responses brief (1 – 2 paragraphs). 
+
+ 
+
+ 
+
+ 
+
+Introduction:  Gavin Miller 
+
+This document is a first attempt to capture the bold topics or unsolved problems that are the focus of current and future projects in Adobe Research. Many are aligned with our existing pillars of investments and priorities for 2025. However, some ideas transcend that structure, and may, on further refinement, form the basis of pillars in future years. 
+
+Some of these ideas will grow to become the story that we and Adobe tell in how we invested and flourished in the next few years. It will be the northerly star cluster against which we hire talent and align resources, even as we continue to help with more pragmatic needs.  
+
+  
+
+  
+
+Problem 1: Functional World Generation over Space and Time 
+
+Pillars: Media Generation, Media Editing 
+
+Nathan Carr 
+
+Limits of today’s models: 
+
+Entangled Spaces. Today generation is entangled with projection (video, imaging) leading to identity loss and limited control. This includes correctness including notions of perspective, physical motion, object permanence. 
+
+Equivariance.  Today generative models are broken under basic transforms such as translation and rotation.  While some work has explored notions of 2D equivariance, 3D equivariance is important for consistent editing tasks across images, video, and immersive. 
+
+Limited Spatial Intelligence. Current models (including VLLMs) only weakly understand spatial context, and spatial relationships (i.e. next to, on top, adjacent, under, between), and don’t have the ability to store/record precise location or spatial motion. 
+
+Fixed Size Context. State-space is limited preventing iterative editing. Challenges exist in how to define systems that support seemingly infinite context windows across time and space. The “state” of the document/world needs to be recorded so it can be edited and updated in a predictable non-destructive manner.  See (“Attention is not all you need” below). 
+
+Multi-scale generation. Large models today assume everything is memory resident which includes the entire context.  As a result, outputs tend to be at fixed resolutions.  Future models may produce high-resolution locally from coarse global context. Generation and editing of large-scale content (high resolution) requires paging, caching, storage, multi-resolution technologies.  Analogies: Photoshop pages image tiles.  Massive game engines that bring in parts of the work on demand as necessary.  
+
+What unlocks will this breakthrough bring: 
+
+Storytelling. It is important to have a representation that “anchors” artist intent. This representation may be explicit, entirely latent, or a mix of both. 
+
+Composition. Spatial layout control to design set, actors, props, and scene 
+
+Reframing. Reframe-able video with identify preservation. Real-time bullet-time tech that can generate novel views from camera feeds 
+
+Relighting and Restyling. Change lighting and appearance in an identity preserving manner. 
+
+Massive worlds & Infinite Detail. generation of large spaces with coarse to fine detail.  
+
+Dynamic worlds. generating both long term motion (requires motion planning) and short term or repeated local motion. 
+
+Problem:  Attention is not all you need 
+
+The attention mechanism is at the core of transformers, which themselves are at the core of today's generative methods. This is an extremely powerful pattern recognition mechanism, where the next-token prediction comes as a composition of patterns relationships learned from data and rooted in the N previous tokens. Quadratic attention models limit the scaling with respect to N, but even linear Mamba-like approaches lack a basic principle of cognition: memory. Attention imitates it well by considering large windows, but "memory" per se is, in this context, only a transient concept emerging from the stats in training data, it is not factually related to the actual inference stream. Hence the requirement of needing gigantic models even for simple tasks. A lot of AI research is currently trying to make memory a decisive component of prediction systems, with no real success so far. In our "3D" context, the notion of memory equals a "map" that models, at coarse scale, what was generated and what needs to be generated and, in a dynamic setting, how what was generated evolves over time and should influence what will be generated. So, maybe a fruitful direction to pursue would be to equip generative systems with an actual model of what was generated so far, beyond the window. In the 3D setting, it goes back to "Malik's mini-worlds", where more than the N last steps, an actual (geometric, physics, or purely neural) model of the world is progressively built, and influences e.g., the attention mechanism or whatever method is used to generate next. This does not necessarily cope well with "all tensors" representations, as a heavily dynamic data structure would need to be maintained, queried, and live-fine-tuned; this may be challenging to implement. But this could be a step forward in "spatial intelligence", that could maybe generalize to other AI fields.  
+ 
+
+ 
+
+ 
+
+Problem 2 Multimodal LLM for Generation and Editing 
+
+ 
+
+Owners: Eli / Hailin / Sylvain  
+
+Pillars: Media Generation, Media Editing 
+
+ 
+
+What the problem is: We seek to augment reasoning engines like LLMs to support creative applications via multimodal editing and generation. We believe we can better support existing workflows and enable new workflows that will bring major value to our users. For instance, users can formulate high-level tasks like “give a Christmas feel to this picture” or complex multimodal requests like “put this product <attached image> in these scenes <more attached images> to create cinemagraphs for Blue Sky, Instagram, and Facebook”.  
+
+ 
+
+What solutions to the problem are being explored: Efficient training of a MLLM from LLM without forgetting its world knowledge, representation of edits as token streams suitable for transformers, chain-of-thoughts for editing, multimodal input and output… 
+
+ 
+
+What potential impact will a solution to this problem have on the Adobe business: New operations at the scale of a working session instead of isolated edits leading to new workflows. New multimodal workflows (e.g., marketing campaigns, movie scripts…) leading to new products 
+
+ 
+
+ What is the current state of the research exploration: Several research proofs-of-concept are available, a first prototype will soon be available 
+
+ 
+
+How urgent is it to solve this problem, and what can be done to expedite the work: It is urgent, other companies are working on it. GPT 4o images is the most recent announcement in this domain and it is impressive. 
+
+ 
+
+ 
+
+Problem 3. Deep Image and Image-Collection Understanding of Content, Aesthetics, Creative Process, and Story 
+
+Scott / Kushal 
+
+Pillar: Content Intelligence 
+
+ 
+
+What the problem is 
+
+Foundation model capable of interpreting and understanding the content, composition, quality, aesthetics, and origins of creative media to enable users across all levels of digital literacy to work with content collections of any modality efficiently and at scale. 
+
+ 
+
+What solutions to the problem are being explored 
+
+AdobeOne project continuously training and deploying (a) VLM internal CLIP model (AdobeOne Beta); (b) MLLM understanding model (NextGen AdobeOne).  (a) is being used extensively across Adobe for search, discovery, and aesthetics (e.g. Be, St, Pr); (b) is being trained on Adobe tasks such as layout captioning, multi-asset comparison, text and design understanding. We explore photo aesthetics understanding in the PhotoEye project as a task that distinguishes Adobe. There is also a new Album Intelligence initiative to specifically address image organization, targeting an organizer agent for LR. The challenge is to enable MLLMs to do joint multiple image understanding. The Masking Foundation Model (MFM) project is building a foundation model for multiple segmentation tasks, e.g. automatic object and subject selection.  
+
+ 
+
+What potential impact will a solution to this problem have on the Adobe business 
+
+Vastly simplified user interfaces, including agentic interfaces, that communicate with the user at the semantic level about high level tasks and intents 
+
+NextGen Semantic Search in which our products always satisfy the user’s request 
+
+An image organizer agent capable of selecting photos based on photographer intent 
+
+An image editing agent that can also help our users become better photographers 
+
+High-quality image generation and editing that satisfies the user’s intent 
+
+Agentic interfaces would have the ability to describe image content similarly to actual people such as “a father playing soccer with his child” instead of “a man and a child in a park with a ball next to them”. This will allow our users to have a natural agent interaction.  
+
+Content understanding is key for high-quality generation and editing. Pixel-level semantic understanding enables high-quality outputs driven by higher-level understanding models, e.g. to make a sky “more dramatic” while precisely respecting the details of the skyline. 
+
+In a future with real-time generation of dozens of images or multiple real-time image editing methods for the same task, content understanding enables our products to show only the best results to a user or agent. An image “judge” provides a generic and flexible algorithm to get the best possible editing result by comparing outputs from multiple methods.  
+
+Image Understanding will allow us to generate editing instructions to make a generated image better match a user’s request. For search, we can do “generative search” in which we automatically edit retrieved images to make them closer to a user’s query. In the future, a user will always receive a diverse set of numerous images that match the user’s request. 
+
+Solving joint, multiple image understanding will enable an organizing agent capable of selecting photos based on a photographer’s storytelling intent. For example, if a wildlife photographer is working for a National Park who wants to advertise how amazing their park is, then the agent will select majestic pictures of different animals with aesthetically pleasing park backdrops. But if the customer is an environmentalist group who wants to show how humans hurt nature and wastelands, the photos selected will be very different. 
+
+ 
+
+What is the current state of the research exploration 
+
+AdobeOne Beta significant impact in multiple products for search, content recommendation, moderation, and aesthetics.  AdobeOne MLLM work is nascent phase but reasonable initial model and captioning performance achieved. PhotoEye has achieved very impressive aesthetics understanding results. MFM is shipping its first feature of Select Subject in PS at London MAX 2025. A strategy has been developed for the organizer agent. 
+
+ 
+
+How urgent is it to solve this problem, and what can be done to expedite the work 
+
+This project requires further headcount and compute to scale up training and specialize models. For Album understanding and organization, we have the chance to be first and ahead if we invest properly now. Otherwise, we will have another “GPT-4o”-like moment for organization in the future. It is urgent to solve this problem. Content understanding is a ubiquitous requirement across products for generation, editing, search, and organization. We cannot only rely on external models (e.g. GPT) due to cost/privacy and flexibility to specialize the models to reach distinguishing performance levels on Adobe tasks.
+ 
+
+Problem 4. Controllable video co-creation (human/agent)  
+
+Pillar: Media Editing, Media Generation, Agents 
+
+Gautham Mysore 
+
+ 
+
+Our goal from the user's perspective  
+
+We believe Adobe should have end to end video creation tools that are simple to use (of course) with as much (and as detailed) control as creators could desire. People should be able to go from idea (high level and low level) to produced video fast to tell their story. They should be able to focus on whichever aspects they care most about, with agents doing the rest. It should support any combination of generated and captured video (including both the pixels and audio). The part that the user focuses on will vary depending on an individual's goals. Regardless of what their focus is, the output video should always be amazing.  They can have very simple inputs for near-fully automatic operation (e.g. for quick video for social media) or extreme levels of control (e.g. for filmmaking). It can also address various gaps in the middle that we might miss if we simply think about a “novice version” and “pro version”.   
+
+   
+
+Translating this to the technical pieces  
+
+The key technical pieces to enable this are -   
+
+Foundation models (video/audio specific or multimodal)  
+
+GenAI Control   
+
+Representation of Story  
+
+Video Understanding and Editing Agents  
+
+  
+
+The focus here is primarily 2-4. We think there are numerous unsolved research problems that will be major differentiators to Adobe in these areas.  
+
+Piece 1 is an essential foundational element. This includes models for generation and understanding - Clineto, Audio Gen Models, Gen5, and AdobeOne. There will be unsolved research problems there as well. However, there is a lot of knowledge in those spaces already, innovation that we can leverage is happening fast, it is expensive, and it does not seem like our core differentiators.  
+
+Most of the proposed research (pieces 2-4) is agnostic to whether our foundational models are video/audio specific or true multimodal.    
+
+  
+
+Open research problems  
+
+We need extensive GenAI control mechanisms for our users. They should be able to operate at a semantic level. We therefore need to both invent the control mechanisms and ensure that there is a good correspondence to the semantic latent space in our foundational models. So, in addition to inventing the control mechanisms, there will be some work in defining the latent space (either explicitly or nudging the model to learn the right space).  
+
+A lot of the focus of our generative models have been low level (at the pixel and short time frame level). When someone is creating a video, there is an underlying story that they are trying to tell. Today, they tend to translate that vision into low-level constructs supported by video generation models and video creation tools more broadly. To truly help them bring their ideas to life, we think it will be valuable to have an underlying representation of story in our models. This will give a more direct correspondence between the task they are trying to accomplish and the tools that we provide. If we have long enough context windows, some of this could potentially be baked into our foundation models directly. If not, we can build story level models that connect to our foundation models. This should also allow seamless use of both generated and captured video together.  
+
+If we have the above (semantic latent space, control mechanisms, and representation of story), we will have a great set of tools for our users. If we then have agents that can work in this same space, users could do whichever parts of the creation process they like and agents can do the rest. For this to work well, our agents need to have an amazing sense of aesthetics, to give confidence that the output will always be great. The aesthetic sense could be based on use case (e.g filmmaking vs. marketing videos) and preferred style (e.g plethora of styles of filmmaking). Along with learning aesthetics, there are many open research problems outlined here (for agents working in this new space as well as in our current products). 
+
+In all cases, above, there are both core technical problems as well as user interaction problems that we need to solve. 
+
+The research areas described are quite broad. It is hard to describe stopping criteria of when we deem that they are solved problems, but here are a few things to guide it -  
+
+The semantic latent space in our foundational model supports most control mechanisms of interest. 
+
+Our video creation agents consistently have a great sense of aesthetics. 
+
+Our story level representations support most important workflows of interest. 
+
+We won’t be "done" for video control mechanisms until "filmmaking is solved" 😊 
+
+ 
+
+How urgent is it to solve this problem, and what can be done to expedite the work 
+
+Very urgent. This could be what propels Adobe’s video business. 
+
+ 
+
+ 
+
+ 
+
+Problem 5: Training and Inference Efficiency 
+
+Invent breakthrough efficiency improvements for foundation model training and inference to enable Adobe to move all model inference on device and deliver sub-second inference performance at SOTA resolutions and quality. This will enable real-time interactive generative media editing experiences beyond what we are capable of delivering with current text input approaches and significantly improve controllability and rapid iteration. 
+
+David Tompkins, Sylvain Paris 
+
+Pillar: Efficiency/On-device 
+
+The benefits are obvious if we succeed, but it is unclear if we are currently investing towards this goal in a rational way that is independent of our existing foundation model projects. Currently, I see a fragmented set of projects across multiple teams inside and outside of Adobe Research that are attacking different elements of this problem, most of which have a bias towards directed research for near-term feature deliveries. If we were to take a step back and fund a longer-term research project to attempt more speculative experiments in this space – rather than merely fast follows of the latest external publications that demonstrate successes – we could approach this problem more holistically. 
+
+What does this research agenda look like? We would pursue progress on multiple fronts, with some current projects shown as examples of the domain: 
+
+Model architecture improvements – e.g. Sparse MoE and FFN, Mamba 
+
+Model FLOPS efficiency improvements – e.g. sparse attention (and attention variants), DMD 
+
+Distillation and optimization – quantization, TRT optimizations 
+
+Hardware optimization and profiling – custom NCCL variants, GPU kernel profilers 
+
+We could also optimize the high-level optimization strategic based on an economic model of predicted and actual usage versus the cost and benefit of optimizations. While it may be tempting to optimize as soon as the model is built, if it is rapidly superseded by other models, that might be an over-investment. Doing this progressively might be worth considering, to trade-off benefits and unpredictable useful lifetimes of the model. More daringly, the optimization budget could be funded differently than other investments, based on a one-year-or-less ROI benefit directly with finance. Spending a dollar to save two is in a different category than adding more functionality. 
+
+ 
+
+ 
+
+ 
+
+Problem 6 Agentic Reasoning  
+
+EPIC - Vishy Swaminathan 
+
+ 
+
+What is the problem? 
+
+Adobe’s vision for AI-first user experiences presents the unique challenge of building systems that truly understand user intent, evolve over time, and autonomously support complex workflows. Current AI assistants struggle with the following issues: 
+
+It is very hard to adapt and self-improve based on the shifting context and evolving interactions. 
+
+Reasoning in all three clouds is limited to the available context which doesn’t utilize long-term memory. This limits the ability to personalize effectively and restricts the ability of Agents to learn from and adapt to users over time. 
+
+Planning and reasoning, especially in enterprise-critical workflows (DX) is different from math reasoning and requires domain-specific knowledge and proprietary data. 
+
+The context for doing effective reasoning is important. Especially in CC and DC, basic retrieval methods have to go beyond understanding the context of a user’s or agent’s need and necessitates reasoning across multiple pieces of information. Identifying not just relevant content but also content that provides crucial context, contrasting viewpoints, or complementary information.  
+
+This limits our ability to create AI systems that behave like competent digital collaborators or thought-partners anticipating user needs, adapting to context, and supporting creative and enterprise-grade tasks in a grounded and reliable way. 
+
+ 
+
+What are the solutions being explored to the problem? 
+
+Adobe research is tackling these challenges across several coordinated fronts: 
+
+Synthetic Data Generation & Distillation: We are using LLMs to simulate realistic user interactions and trajectories across personas in all 3 clouds, generating high-fidelity data to refine prompts, and learn better reasoning models. 
+
+Agentic Retrieval: We are advancing retrieval beyond static search using query decomposition, iterative refinement, contextual re-ranking (via transformer models), and knowledge graphs to support reasoned, multi-step retrieval of relevant and nuanced information. 
+
+Memory & Personalization: We are prototyping systems that mimic human memory learning procedural knowledge, behavioral preferences, and contextual facts across sessions. This includes skill capture through demonstration, behavioral cloning, and continual learning. 
+
+Attribution with reasoning in Acrobat AI Assistant: to enable “attribution as explainability” in multi-step complex Knowledge Work workflows. 
+
+We are adapting reasoning to domain-specific enterprise tasks, using dynamic planning techniques (e.g., MCTS + A*, RAG-based task decomposition) and model calibration to support long-horizon workflows like marketing campaigns or automated design iterations. 
+
+ 
+
+What potential impact will a solution to this problem have on the Adobe business? 
+
+Deeply personalized and efficient AI Agents across 3 Clouds. Scaling unbounded knowledge collections across different domains will be enabled, leading to improved reasoning for complex tasks and multi-turn interactions. It would enable Enterprise-ready automation, with agents that understand goals, plan across multiple steps, adapt to results, and align with customer-specific contexts and data. More intelligent search, discovery, and content reuse, improving user productivity and satisfaction while ensuring attribution and rights compliance. 
+
+ 
+
+What is the current state of research exploration? 
+
+We are using simulated user data to improve simple Chain-of-Thought reasoning. We are also using them to distill LLMs into smaller, mobile-friendly models.  Optimizing for human simulator alignment, and low-variance policy gradients are being explored. Our research includes skill capturing via LLMs and skill application. We have early prototypes that can capture simple skills through demonstrations. Agentic retrieval prototypes are in development using transformer-based contextual ranking, LLM-powered query rewriting, and graph-based search strategies. We envision this to power better reasoning models. There are emergent methods integrating symbolic planning and model calibration for domain-specific workflows. These foundational components are converging toward agentic systems that can observe, learn, plan, and act effectively over time. 
+
+ 
+
+ 
+
+How urgent is it to solve this problem, and what can be done to expedite the work? 
+
+Agentic AI is key to differentiating Adobe’s offerings in both consumer and enterprise markets. Expanding investment in cross-functional research teams focused on reasoning and planning is required. Establishing strategic partnerships with universities to tap into cutting-edge developments in this domain is highly desirable as well. We want to build stronger internal benchmarks and simulations to measure reasoning, planning accuracy, and user satisfaction without compromising privacy. For that we also would need access to annotators, testers and high-quality labeled data for reasoning and planning tasks. 
+
+ 
+
+Problem 7 Agentic Experiences 
+
+EPIC – Vishy Swaminathan 
+
+ 
+
+What is the problem? 
+
+As Adobe's AI-first agentic systems evolve, a key challenge is how to enable AI agents that can autonomously handle complex, multi-turn workflows across modalities and applications, while offering users intuitive, trackable, and controllable experiences. We still have fundamental gaps in: 
+
+Cumbersome tracking of tasks in long, multi-step conversational workflows. 
+
+Limited personalization and control over how agents learn, act, and evolve. 
+
+There is fragmentation across tools, making it hard for agents to operate across the 3 Clouds seamlessly. 
+
+We have Design generation and brand consistency challenges in Express, which require agents to reason deeply about style, layout, user intent, and brand alignment. 
+
+Solving these problems is central to creating agentic experiences that go beyond basic assistants, transforming how users interact with Adobe’s creative, document and enterprise products seamlessly. 
+
+ 
+
+What are the solutions being explored to the problem? 
+
+We are developing novel interface and visualizations where human decision makers can track progress of tasks/workflows/goals visually in conversation. We also employ agentic memories and quantify agents’ skills for humans to guide agents better to accomplish their tasks. Finally, we are developing technology that performs actions via existing Adobe product interfaces (GUI, scripting, etc.) and executes user queries on-demand and provides proactive assistance when beneficial. Specifically, we have also built prototypes on Text2Script for Photoshop and Illustrator and enhanced the script-generation capabilities subsequently. We have also built a POC on an orchestration system for multiple CC Apps via scripting, enabling complex creative workflows.   
+
+In Layout & Design Generation, we have innovated in controllable, editable document generation combining LLMs, diffusion models, and differentiable design principles. We have also explored Multi-layer, multi-modal content generation, including layout infilling, conditioned design, and long-form support. 
+
+For On-Brand Content Creation, to capture the nuances of the brand from both explicit (brand guidelines) and implicit (brand-approved assets) definitions, we are developing a multimodal encoder that projects these preferences into a generic brand representation space. 
+
+ 
+
+What potential impact will a solution to this problem have on the Adobe business? 
+
+Agentic experiences will unlock next-generation productivity and creativity for Adobe users: 
+
+Lowering the learning curve for products across clouds by enabling natural language interfaces and automation. 
+
+Allowing businesses to maintain consistent brand identity at scale—vital for enterprise, SMBs, and creators alike. 
+
+Differentiating our products through dynamic layout (Express), on-brand generation (Express, Genstudio), and workflow automation (All clouds). 
+
+Enabling cross-app creative workflows powered by intelligent agents—an area underserved by competitors. 
+
+Ultimately, agentic systems will define the next era of human-computer interaction in creativity and productivity, with Adobe at the forefront. 
+
+What is the current state of the research exploration 
+
+Agentic tracking and interfaces: Early-stage POCs are in development, with planned availability in Q3. 
+
+Text2Script and orchestration: Working prototypes exist for Photoshop and Illustrator; cross-app orchestration POCs have been developed. 
+
+Layout generation: Elements like score-based evaluation are live in Express resize features; multimodal layout models are in prototyping. 
+
+Brand generation: Post-processing tools are already shipping. The brand encoder is in PoC, with V1 expected by end of Q2 FY25. 
+
+We are building the Common Agentic Framework in Research where Orchestration of multiple Agents are possible to accomplish complex tasks. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Problem 8 Provenance 
+
+Pillar:  Responsible AI  
+
+Your name: John Collomosse 
+
+What the problem is 
+
+Understanding and documenting the origins of creative content is more important than ever in today’s environment. It is a multifaceted problem that requires sophisticated solutions. Content provenance can help assess the authenticity of content such as documents, photographs, or videos in diverse domains, including photojournalism, news, or even scientific or satellite imaging. There is an urgent demand for durable provenance technologies that can be applied without quality degradation to traditional or generative content, in any modality, to determine how it was created. A parallel challenge is to improve the accessibility of this provenance information for all levels of digital literacy, through summarization and AI assistive technologies. Another aspect of provenance is characterizing which model or training data contributed to the generation of synthetic media. Solving this attribution problem could, when combined with provenance data, change how content creators are compensated in the era of generative AI. It would also provide introspection capabilities for better understanding our models and likely lead to significant algorithmic improvements. Creating value through provenance technologies also requires advances in the scalability of decentralized technologies (for example, media tokenization and registries) to represent creator rights and ownership. This would enable value creation through content re-use in the age of generative AI. 
+
+ 
+
+What solutions to the problem are being explored 
+
+Content watermarking and fingerprinting for video, audio and print. 
+
+Data attribution and explainable generation for images.   
+
+Classifiers for identifying generated images and the corresponding models 
+
+MLLM for conversational agents summarizing change and provenance.  
+
+Decentralized technologies for registering creative content over re-use (opt-in/out) and for monetizing the re-use of content. 
+
+ 
+
+What potential impact will a solution to this problem have on the Adobe business 
+
+Solving this problem will deliver significant benefits for Adobe. First, it ensures compliance with emerging US, EU, and UK legislation on AI labeling and opt-out requirements, which in turn would reinforce Adobe’s reputation as a responsible AI innovator. Second, the robust implementation of provenance solutions will position Adobe to co-create and participate in new markets for data and content re-use in the age of generative AI. This will be achieved via the newly launched Content Authenticity Initiative (CAI) for enterprise known as CAFE through which Adobe can expand into sectors where media integrity is paramount, such as regulated industries. Customers being explored include government content verification, financial advisory services, and medical video authentication.  
+
+ 
+
+What is the current state of the research exploration 
+
+Adobe has created a novel business ecosystem and international standard around information integrity via content credentials and has begun to exploit it via CAI integrations and standalone products.  Numerous projects in data attribution for images and durable provenance for images, video, audio and 3D (NeRF) have been, or are being, undertaken by ILO researchers and the results patented and published.  There are existing product team asks for video and audio provenance from Firefly and from DVA. 
+
+  
+
+How urgent is it to solve this problem, and what can be done to expedite the work 
+
+AI labeling and transparency are becoming increasingly critical across all industries, and they can be most effectively delivered through robust, durable provenance technologies. Misinformation remains one of society’s most urgent challenges, and the Content Authenticity Initiative (CAI) serves as a strategic hedge against potential regulation in the rapidly evolving generative AI sector. 
+
+The consumer ecosystem for Content Credentials has already gained significant traction—largely thanks to Adobe’s leadership—creating a prime opportunity to monetize the enterprise space before competitors can catch up (i.e. the CAFE initiative). Emerging standards, such as JPEG Trust, are building upon the C2PA open standard – which together with widespread platform adoption highlights the growing prominence of provenance technologies. 
+
+CAI represents a low-cost, high-impact investment, as existing staffing and computational resources are sufficient to execute on the previously presented CAI/Research strategic plan for 2024–2026. This positions CAI to deliver considerable value while maintaining a sustainable, scalable approach to combating misinformation and ensuring trust in AI-generated and manipulated content. 
+
+ 
+
+Problem 9 Unified High-Quality Identity-Preserving Image and Video Editing 
+
+Pillars: Media Editing 
+
+Owners: Zhe Lin, Yuqian Zhou 
+
+What the problem is: We would like to build a model that truly and fully satisfies the needs of creatives, from professionals to amateurs, in the domain of image and video editing. For instance, we need a solution for efficiently editing high-resolution images and videos with identity preservation and photorealistic quality, eventually also runnable on-device. The unified model takes an interleaved multimodal instruction input, and can perform most of the common media editing tasks including all inpainting tasks (GenFill & GenExpand), mask-free object removal and insertion, appearance and visual attribute editing, harmonization, object stitch, reference-based editing, single/multiple object customization etc. OpenAI's GPT 4o is promising, but lacks identity preservation, high-resolution and flexible precise control support needed for professional users, and hard to deploy as an on-device technology for our users. 
+
+What solutions to the problem are being explored: We are exploring this vision with a project called MultiEdit where we build a large-scale, high-quality paired editing data generation model/pipeline and a unified multi-task diffusion transformer-based model supporting many multimodal instruction-based editing tasks and several structure understanding tasks. We are also exploring high-compression latent space in order to support high-resolution outputs (4K or above). 
+
+What potential impact will a solution to this problem have on the Adobe business: 
+
+Deliver a unified technology/model with very high quality, efficiency and success rate to our products (both cloud and on-device) to support all mainstream media editing workflows for our users. 
+
+What is the current state of the research exploration: In a proof-of-concept stage. We have our first research paper UniReal accepted at CVPR'25, and built our initial internal prototype and demo based on Filix3. MultiEdit is also used as foundation for building specialist editing models including ClioErase, InstructEdit, ObjectStitch, Harmonization, Mirai (ObjectMover), GenProp, etc. 
+
+How urgent is it to solve this problem, and what can be done to expedite the work: 
+
+Photoshop and Lightroom team are committed to deliver MultiEdit-based specialist editing models in 2025, and the unified MultiEdit model later. Multimodal image editing is a very competitive area, so it is urgent to accelerate the pace of the exploration in this space. More computing resources are always helpful to accelerate this work. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Problem 10: Interactive World Model 
+
+Your name: Eli, Jianming, Xun, Hailin, Sylvain 
+
+ 
+
+What the problem is:  
+
+ 
+
+We seek to create a model able to generate videos and sequence of high-quality images with accurate physics interactive, that is: 
+
+The model generates videos with high visual quality. 
+
+The generated videos accurately depict the physics of the world. 
+
+The generation happens as fast as the playback and while the video plays. 
+
+One can interact with the generation as it is happening, e.g., controlling camera angles, redirecting motions, or modifying the prompt. 
+
+ 
+
+ 
+
+What solutions to the problem are being explored: 
+
+ 
+
+Filix 3 is a solid foundation model for video generation. 
+
+CausVid currently enables video generation at 10 FPS, as well as long video generation controlled by dynamic prompts entered on the fly. 
+
+Both approaches are compatible, i.e., we can combine them.  
+
+ 
+
+What potential impact will a solution to this problem have on the Adobe business: 
+
+This would be a game-changer on several fronts. Higher-quality physically accurate videos would open the door to a larger market. Interactive generation and editing would revolutionize how people work with videos and images, e.g., with live editing and reprompting, physically-based filters, world-building abilities.... 
+
+ 
+
+What is the current state of the research exploration: 
+
+We have implemented CausVid on Filix3 2B in the Mori Foundation codebase, resulting in a model that is even faster than the original CausVid (which is based on Filix2). 
+
+We have implemented track-based motion control on the Filix3 2B model and distilled it into CausVid-Filix3 2B, which enables fast drag-based video generation. The video can be rendered in real time, but there is currently a one-second delay before changes in control inputs are reflected in the generated video, which is a limitation of CausVid. 
+
+To reduce latency to <0.1s and achieve true real-time interactive generation, we are implementing a VAE without temporal compression, as well as developing an improved causal distillation framework that supports lower latency. We expect to finish both developments in Q2, which will enable us to build a POC of real-time interactive video generation demo in Q3. This would be something that no one else in the world has successfully demonstrated yet (on real videos). 
+
+ 
+
+How urgent is it to solve this problem, and what can be done to expedite the work: 
+
+This is a situation where a Sora / GPT-4o moment can happen in the near future. Very recently, other big companies have started to heavily invest in this direction, including Google DeepMind, OpenAI,Microsoft, and NVIDIA. Many startups have also emerged in this direction, such as World Labs, Decart, and Odyssey. A competitor will likely soon demonstrate a model with similar capabilities and not starting now will put us in the situation of reacting instead of leading.
+ 
+ 
+
+Appendix 1: Thinking beyond the pillars  
+
+Gavin Miller 
+
+Agents will understand media using world knowledge, specific knowledge (from a domain and context) and at a project as well as a task level. How does that fit into a larger vision of how our users might interact with our products, or even closed-loop ecosystems of adaptive campaigns and even business strategies explored by the system semi-automatically? 
+
+  
+
+Will documents embody intention as well as knowledge and processes? A textbook that wants to teach, a form that wants to gather information and facilitate a process, a state-of-the-art report that wants to compare ideas in a domain in a way that stays current in a rapidly evolving field. How do we capture the author's intent and then manifest it adaptively to the customer in the best format and experience? How can customer questions and feedback reshape the original document to better achieve the document’s intent? 
+
+  
+
+Will all our products have a “theory of mind” of the user, knowing what they know, what they intended and their level of attention and urgency? Do we think of the user’s wellbeing over multiple timescales including task level, project level, and career level? Are we a better form of application help, a coach, a mentor or a celebrated persona embodying our wisdom or admired taste in a masterclass? Do we represent ideas as known or true, or expressed by an individual, with their own motives and biases, but in a benevolent alliance? Do we, despite all the technology, empower choice and originality? 
+
+ 
+
+Bending the Curve 
+
+How can we transform the prosperity of the business? Providing just tools in a competitive landscape may require exponential efforts to achieve linear results. Alternatively, can we look at our technologies and products through the eyes of network effects, where the value of the products grows quadratically with the number of people using them, as social networks do?  Can we reframe AI as embodying a combination of open and proprietary data, forming a marketplace of both general knowledge and high-quality licensable content – whether that is music creation and licensing, or high-end text-books - a new form of marketplace with synergies between content suppliers and consumers, as Stock has, but with more ready access and malleability and insight through the agentic technology? Can we find a win-win model with content suppliers to maintain the creation and leveraging of highly trust-worthy or deeply original content? 
+
+ 
+
+Thinking beyond the obvious will help us to be first and best. 
+
+ 
+  
+
+ 
