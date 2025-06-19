@@ -1,397 +1,1076 @@
-<!-- Backup Slide: Platforms shape content (was slide 7) -->
-<div class="slide" id="slide-backup-1">
-    <div class="slide-content">
-        <p>Content is shaped by <span class="emph">consumption </span>&nbsp;platform &</br><span class="emph">authoring</span> tools</p>
-        
-        <div class="card-container">
-            <div class="flip-card" data-index="0">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <h3>2006</h3>
-                        <img src="media/twitter-logo.png" alt="Twitter" class="flip-icon">
-                    </div>
-                    <div class="flip-card-back">
-                        <h3>Twitter</h3>
-                        <p>All about <strong>text</strong></p>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card" data-index="1">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <h3>2010</h3>
-                        <img src="media/instagram-logo.png" alt="Instagram" class="flip-icon">
-                    </div>
-                    <div class="flip-card-back">
-                        <h3>Instagram</h3>
-                        <p>All about <strong>photos</strong></p>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card" data-index="2">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <h3>2016</h3>
-                        <img src="media/tiktok-logo.webp" alt="TikTok" class="flip-icon">
-                    </div>
-                    <div class="flip-card-back">
-                        <h3>TikTok</h3>
-                        <p>All about <strong>videos</strong></p>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card" data-index="3">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <h3>???</h3>
-                        <img src="media/question-mark.svg" alt="What's next" class="flip-icon">
-                    </div>
-                    <div class="flip-card-back">
-                        <h3>What's next?</h3>
-                        <p>Interactive, playful content</p>
-                    </div>
-                </div>
-            </div>
-
-            <p class="italics">A good social media platform comes with a good authoring tool.</p>
-        </div>
-    </div>
-</div>
-
-<!-- Backup Slide: Spider-Man in Multiple Formats (was slide 8) -->
-<div class="slide" id="slide-backup-2">
-    <div class="slide-content">
-        <p>Large production companies also publish content in multiple form </br> <span class="emph">Spider-Man</span></p>
-        
-        <div class="centered-example-container">
-            <img src="https://static.wikia.nocookie.net/character-level/images/3/32/Earth616_PeterParker_Render_NoiseRemoval.png/revision/latest?cb=20190825172909" alt="Spider-Man Icon" class="zoomable-image" id="spiderManImage">
-        </div>
-        
-        <div class="attribution">
-            Comic Panel: <a href="https://readcomiconline.li/Comic/The-Amazing-Spider-Man-2018" target="_blank">The Amazing Spider-Man (2018)</a><br>
-            Movie Clip: <a href="https://youtu.be/7r93JmbVFo8?si=o8gKVpnf1inFJ3NO&t=59" target="_blank">Spider-Man 3 (2007) Movie Clip on YouTube</a><br>
-            3D Model: <a href="https://sketchfab.com/3d-models/spiderman-fullyrigged-2a093a11c3ad40d18cdb5885fd48047b" target="_blank">Spiderman (FullyRigged) by CrazyPandaDesigns on Sketchfab</a><br>
-            Spider-Man Image: <a href="https://character-level.fandom.com/wiki/Spider-Man_(Marvel_Comics)" target="_blank">Character Level Fandom Wiki</a>
-        </div>
-    </div>
-</div>
-
-<!-- Spider-Man Modal -->
-<div id="spiderManModal" class="modal">
-    <span class="modal-close">&times;</span>
-    <div class="carousel-container">
-        <!-- Spider-Man slides will be dynamically added here -->
-        <div class="carousel-nav carousel-prev">&#10094;</div>
-        <div class="carousel-nav carousel-next">&#10095;</div>
-        <div class="carousel-dots"></div>
-    </div>
-</div>
-
-<script>
-// Define the Spider-Man formats with captions
-const spiderManFormats = [
-    {
-        title: 'Comic Book',
-        type: 'image',
-        content: 'https://2.bp.blogspot.com/N47nE_TgXMu1Lf9IkL8SAFKkey9er790JVhzfAWjKpn1ey3GbxeBhBjgkcB14iKLb2XDaC2LsR2GA0hWs0Z9-i9KoqpJq3DZjuZdGipt6WqgzQfPS3ZRYvM7bklLf7oiMla-HBMXkw=s0',
-        caption: 'Spider-Man first appeared in a comic book in 1963'
-    },
-    {
-        title: 'Movies',
-        type: 'iframe',
-        content: 'https://www.youtube.com/embed/7r93JmbVFo8?start=59&autoplay=1&mute=1&enablejsapi=1',
-        caption: 'Spider-Man has appeared in film since 1977',
-        id: 'spiderManVideo'
-    },
-    {
-        title: '3D Models',
-        type: 'iframe',
-        content: 'https://sketchfab.com/models/2a093a11c3ad40d18cdb5885fd48047b/embed?autostart=1&ui_controls=1&ui_infos=1',
-        caption: ''
-    }
-];
-
-let spiderManCurrentSlide = 0;
-
-// Function to create Spider-Man carousel slides
-function createSpiderManSlides() {
-    // Get container
-    const carouselContainer = document.querySelector('#spiderManModal .carousel-container');
-    const carouselDots = document.querySelector('#spiderManModal .carousel-dots');
-    
-    // Clear existing slides
-    const existingSlides = carouselContainer.querySelectorAll('.carousel-slide');
-    existingSlides.forEach(slide => slide.remove());
-    
-    // Clear existing dots
-    carouselDots.innerHTML = '';
-    
-    // Create new slides and dots
-    spiderManFormats.forEach((format, index) => {
-        // Create slide
-        const slide = document.createElement('div');
-        slide.classList.add('carousel-slide');
-        slide.dataset.slideIndex = index;
-        if (index === spiderManCurrentSlide) {
-            slide.classList.add('active');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backup Slides - Future Media</title>
+    <style>
+        :root {
+            --primary: #3368C0;
+            --secondary: #FF9843;
+            --text: #333;
+            --bg: #f0f4f9;
+            --light: #ffffff;
+            --dark: #222;
         }
         
-        // Create content based on type
-        let content;
-        if (format.type === 'iframe') {
-            content = document.createElement('iframe');
-            content.src = format.content;
-            
-            // Different sizing based on content type
-            if (format.title === 'Movies') {
-                // Movie needs more width
-                content.style.width = '80%';
-                content.style.height = '70vh';
-                content.style.maxHeight = '600px';
-            } else if (format.title === '3D Models') {
-                // 3D model needs more space
-                content.style.width = '90%';
-                content.style.height = '75vh';
-                content.style.maxHeight = '700px';
-            } else {
-                // Default iframe size
-                content.style.width = '90%';
-                content.style.height = '65vh';
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+        
+        .presentation {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 1;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--light) 100%);
+        }
+        
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        
+        .slide-content {
+            max-width: 90%;
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        p {
+            font-size: 2rem;
+            margin-bottom: 1.8rem;
+            line-height: 1.6;
+        }
+        
+        .emph {
+            font-weight: bold;
+            font-size: 3.5rem;
+            color: var(--secondary);
+        }
+        
+        .italics {
+            font-style: italic;
+        }
+        
+        .italics.emph {
+            font-size: 2rem;
+            font-weight: normal;
+            color: var(--secondary);
+        }
+        
+        .btn {
+            padding: 1.2rem 2.2rem;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            margin: 0.8rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(255, 152, 67, 0.3);
+        }
+        
+        .btn:hover {
+            background-color: #ff8a2c;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 152, 67, 0.4);
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            z-index: 10;
+        }
+        
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(42, 59, 144, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-dot.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 2.5rem;
+            width: 90%;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .card {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            border-top: 4px solid var(--secondary);
+        }
+        
+        .card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Flip card styles */
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            height: 250px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+        
+        .flip-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            border-radius: 12px;
+            background-color: var(--light);
+            border-top: 4px solid var(--secondary);
+        }
+        
+        .flip-card-front {
+            color: var(--primary);
+        }
+        
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-icon {
+            width: 60px;
+            height: 60px;
+            margin: 15px 0;
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        /* Navigation arrows */
+        .nav-arrows {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(200, 200, 200, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: auto;
+            font-size: 24px;
+            color: rgba(80, 80, 80, 0.8);
+            text-decoration: none;
+        }
+        
+        .arrow:hover {
+            background-color: rgba(200, 200, 200, 0.5);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .arrow.prev {
+            left: 20px;
+        }
+        
+        .arrow.next {
+            right: 20px;
+        }
+        
+        /* Navigation arrows */
+        .nav-arrows {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(200, 200, 200, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: auto;
+            font-size: 24px;
+            color: rgba(80, 80, 80, 0.8);
+            text-decoration: none;
+        }
+        
+        .arrow:hover {
+            background-color: rgba(200, 200, 200, 0.5);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .arrow.prev {
+            left: 20px;
+        }
+        
+        .arrow.next {
+            right: 20px;
+        }
+
+        /* Attribution styling */
+        .attribution {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0.6;
+        }
+        
+        .attribution a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .attribution a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Image zoom modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            margin-top: 2%;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 101;
+        }
+        
+        .carousel-container {
+            position: relative;
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .carousel-slide {
+            display: none;
+            text-align: center;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .carousel-slide.active {
+            display: flex;
+        }
+        
+        .carousel-image {
+            max-width: 90%;
+            max-height: 85vh;
+            min-height: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+            object-fit: contain;
+        }
+        
+        .carousel-caption {
+            margin-top: 20px;
+            color: white;
+            font-size: 1.5rem;
+            max-width: 100%;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 50px;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s;
+            z-index: 5;
+        }
+        
+        .carousel-nav:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .carousel-prev {
+            left: -70px;
+        }
+        
+        .carousel-next {
+            right: -70px;
+        }
+        
+        .carousel-dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .carousel-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin: 0 8px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .carousel-dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+        
+        .zoomable-image {
+            max-width: 30%;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            cursor: zoom-in;
+        }
+        
+        .centered-example-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .example-container {
+            max-width: 90%;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .example-container.visible {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
             }
-            
-            content.style.borderRadius = '8px';
-            content.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.15)';
-            content.frameBorder = '0';
-            content.allow = 'autoplay; fullscreen; vr';
-            content.mozallowfullscreen = 'true';
-            content.webkitallowfullscreen = 'true';
-            
-            // Add id if provided
-            if (format.id) {
-                content.id = format.id;
+            h2 {
+                font-size: 2.5rem;
             }
-        } else if (format.type === 'image') {
-            content = document.createElement('img');
-            content.src = format.content;
-            content.classList.add('carousel-image');
-            content.alt = format.title;
-            content.style.maxHeight = '70vh';
-            content.style.maxWidth = '80%';
-            content.style.objectFit = 'contain';
-        }
-        
-        // Create title
-        const title = document.createElement('h3');
-        title.textContent = format.title;
-        title.style.color = 'white';
-        title.style.marginBottom = '15px';
-        title.style.fontSize = '2.2rem';
-        
-        // Create caption
-        const caption = document.createElement('div');
-        caption.classList.add('carousel-caption');
-        caption.textContent = format.caption;
-        caption.style.fontSize = '1.6rem';
-        caption.style.maxWidth = '80%';
-        caption.style.margin = '20px auto 0 auto';
-        
-        // Add to slide
-        slide.appendChild(title);
-        slide.appendChild(content);
-        slide.appendChild(caption);
-        
-        // Insert slide before the navigation buttons
-        const prevNav = carouselContainer.querySelector('.carousel-prev');
-        carouselContainer.insertBefore(slide, prevNav);
-        
-        // Create dot
-        const dot = document.createElement('div');
-        dot.classList.add('carousel-dot');
-        if (index === spiderManCurrentSlide) {
-            dot.classList.add('active');
-        }
-        dot.addEventListener('click', () => goToSpiderManSlide(index));
-        carouselDots.appendChild(dot);
-    });
-}
-
-// Function to show a specific Spider-Man slide
-function goToSpiderManSlide(index) {
-    // Stop video if we're navigating away from video slide
-    if (spiderManCurrentSlide === 1 && index !== 1) {
-        stopSpiderManVideo();
-    }
-    
-    // Update currentSlide
-    spiderManCurrentSlide = index;
-    
-    // Update slides
-    const slides = document.querySelectorAll('#spiderManModal .carousel-slide');
-    slides.forEach((slide, i) => {
-        if (i === index) {
-            slide.classList.add('active');
-        } else {
-            slide.classList.remove('active');
-        }
-    });
-    
-    // Update dots
-    const dots = document.querySelectorAll('#spiderManModal .carousel-dot');
-    dots.forEach((dot, i) => {
-        if (i === index) {
-            dot.classList.add('active');
-        } else {
-            dot.classList.remove('active');
-        }
-    });
-}
-
-// Function to stop the Spider-Man video
-function stopSpiderManVideo() {
-    const videoFrame = document.getElementById('spiderManVideo');
-    if (videoFrame) {
-        // Reset iframe src to stop video
-        const currentSrc = videoFrame.src;
-        videoFrame.src = '';
-        videoFrame.src = currentSrc;
-    }
-}
-
-// Function to go to next Spider-Man slide
-function nextSpiderManSlide() {
-    let next = spiderManCurrentSlide + 1;
-    if (next >= spiderManFormats.length) {
-        next = 0;
-    }
-    goToSpiderManSlide(next);
-}
-
-// Function to go to previous Spider-Man slide
-function prevSpiderManSlide() {
-    let prev = spiderManCurrentSlide - 1;
-    if (prev < 0) {
-        prev = spiderManFormats.length - 1;
-    }
-    goToSpiderManSlide(prev);
-}
-
-// Setup Spider-Man modal close functions
-function setupSpiderManModalClose() {
-    const spiderManModal = document.getElementById('spiderManModal');
-    const modalClose = document.querySelector('#spiderManModal .modal-close');
-    const carouselPrev = document.querySelector('#spiderManModal .carousel-prev');
-    const carouselNext = document.querySelector('#spiderManModal .carousel-next');
-    
-    // Add event listeners to carousel navigation
-    if (carouselPrev && carouselNext) {
-        carouselPrev.addEventListener('click', prevSpiderManSlide);
-        carouselNext.addEventListener('click', nextSpiderManSlide);
-    }
-    
-    // Close modal when X is clicked
-    if (modalClose) {
-        modalClose.addEventListener('click', function() {
-            spiderManModal.style.display = 'none';
-            // Stop video when modal is closed
-            stopSpiderManVideo();
-        });
-    }
-    
-    // Close modal when clicking outside the content
-    window.addEventListener('click', function(event) {
-        if (event.target === spiderManModal) {
-            spiderManModal.style.display = 'none';
-            // Stop video when modal is closed
-            stopSpiderManVideo();
-        }
-    });
-    
-    // Add keyboard navigation for carousel
-    document.addEventListener('keydown', function(event) {
-        // Only handle keyboard navigation when modal is open
-        if (spiderManModal.style.display === 'block') {
-            if (event.key === 'ArrowLeft') {
-                prevSpiderManSlide();
-                event.stopPropagation(); // Prevent event from bubbling up
-            } else if (event.key === 'ArrowRight') {
-                nextSpiderManSlide();
-                event.stopPropagation(); // Prevent event from bubbling up
-            } else if (event.key === 'Escape') {
-                spiderManModal.style.display = 'none';
-                // Stop video when modal is closed
-                stopSpiderManVideo();
-                event.stopPropagation(); // Prevent event from bubbling up
+            p {
+                font-size: 1.4rem;
+            }
+            .card-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .card {
+                width: 100%;
+                max-width: 100%;
             }
         }
-    });
-}
-
-// Function to animate Spider-Man cards
-function animateSpiderManCards() {
-    const spiderManImage = document.getElementById('spiderManImage');
-    if (spiderManImage) {
-        spiderManImage.addEventListener('click', function() {
-            const spiderManModal = document.getElementById('spiderManModal');
-            spiderManModal.style.display = 'block';
-            // Create carousel slides
-            spiderManCurrentSlide = 0;
-            createSpiderManSlides();
-        });
-    }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
     
-    // Close modals setup
-    setupSpiderManModalClose();
-}
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    animateSpiderManCards();
-});
-</script>
-
-<!-- Backup Slide: Content Examples (was slide 9) -->
-<div class="slide" id="slide-backup-3">
-    <div class="slide-content">
-       
-        <p><span class="emph">creators already express their content in a variety of forms</span></br>
-        GenAI is rapidly expanding and accelerating this capability</p>
+    <div class="presentation" id="presentation">
+        <!-- Navigation arrows -->
+        <div class="nav-arrows">
+            <a href="#" class="arrow prev" id="prevArrow">&#10094;</a>
+            <a href="#" class="arrow next" id="nextArrow">&#10095;</a>
+        </div>
         
-        <div class="example-container visible" style="display: flex; flex-direction: column; align-items: center; margin: 2rem auto 0; max-width: 1200px;">
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%;">
-                <!-- 3D to 2D Example -->
-                <div style="width: 30%; background-color: white; padding: 1.2rem; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); margin-bottom: 1rem; display: flex; flex-direction: column;">
-                    <h3 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.2rem;">3D model → 2D Rendering</h3>
-                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-grow: 1;">
-                        <img src="https://discover.therookies.co/content/images/size/w1000/2021/02/Blockout.png" alt="3D Model" style="width: 48%; height: 150px; border-radius: 5px; box-shadow: 0 3px 8px rgba(0,0,0,0.2); object-fit: cover;">
-                        <img src="media/final-render.png" alt="2D Image" style="width: 48%; height: 150px; border-radius: 5px; box-shadow: 0 3px 8px rgba(0,0,0,0.2); object-fit: cover;">
+        <!-- Slide 1: Platforms shape content (was slide 7) -->
+        <div class="slide active" id="slide-backup-1">
+            <div class="slide-content">
+                <p>Content is shaped by <span class="emph">consumption </span>&nbsp;platform &</br><span class="emph">authoring</span> tools</p>
+                
+                <div class="card-container">
+                    <div class="flip-card" data-index="0">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <h3>2006</h3>
+                                <img src="media/twitter-logo.png" alt="Twitter" class="flip-icon">
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>Twitter</h3>
+                                <p>All about <strong>text</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card" data-index="1">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <h3>2010</h3>
+                                <img src="media/instagram-logo.png" alt="Instagram" class="flip-icon">
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>Instagram</h3>
+                                <p>All about <strong>photos</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card" data-index="2">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <h3>2016</h3>
+                                <img src="media/tiktok-logo.webp" alt="TikTok" class="flip-icon">
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>TikTok</h3>
+                                <p>All about <strong>videos</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card" data-index="3">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <h3>???</h3>
+                                <img src="media/question-mark.svg" alt="What's next" class="flip-icon">
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>What's next?</h3>
+                                <p>Interactive, playful content</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Speech to Text Example -->
-                <div style="width: 30%; background-color: white; padding: 1.2rem; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); margin-bottom: 1rem; display: flex; flex-direction: column;">
-                    <h3 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.2rem;">Speech ↔ Text</h3>
-                    <div style="display: flex; align-items: center; justify-content: center; flex-grow: 1; height: 150px;">
-                        <img src="https://birdeye.com/blog/wp-content/uploads/speech-to-text-1024x535.jpg" alt="Speech to Text Conversion" style="width: 100%; height: 100%; border-radius: 5px; box-shadow: 0 3px 8px rgba(0,0,0,0.2); object-fit: cover;">
-                    </div>
-                </div>
-                
-                <!-- Gen AI Example -->
-                <div style="width: 30%; background-color: white; padding: 1.2rem; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); margin-bottom: 1rem; display: flex; flex-direction: column;">
-                    <h3 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.2rem;">Text → Images / Video</h3>
-                    <div style="display: flex; align-items: center; justify-content: center; flex-grow: 1; height: 150px;">
-                        <img src="https://cdn.mos.cms.futurecdn.net/8ojNmKsuDQZaytbyqNz8H4-1200-80.jpg" alt="Generative AI Text to Image" style="width: 100%; height: 100%; border-radius: 5px; box-shadow: 0 3px 8px rgba(0,0,0,0.2); object-fit: cover;">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="attribution" style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.7; text-align: center;">
-                3D/2D: <a href="https://discover.therookies.co/2021/05/03/how-to-create-a-pixar-style-3d-scene/" target="_blank">The Rookies</a> | 
-                Speech-to-Text: <a href="https://birdeye.com/blog/speech-to-text-software/" target="_blank">BirdEye</a> | 
-                Gen AI: <a href="https://www.adobe.com/" target="_blank">Adobe</a>
+                <p class="italics">A good social media platform comes with a good authoring tool.</p>
             </div>
         </div>
 
-        <p>Automatic conversion will help, creators will also want precise expressive control</p>
+        <!-- Slide 2: Spider-Man in Multiple Formats (was slide 8) -->
+        <div class="slide" id="slide-backup-2">
+            <div class="slide-content">
+                <p>Large production companies also publish content in multiple form </br> <span class="emph">Spider-Man</span></p>
+                
+                <div class="centered-example-container">
+                    <img src="https://static.wikia.nocookie.net/character-level/images/3/32/Earth616_PeterParker_Render_NoiseRemoval.png/revision/latest?cb=20190825172909" alt="Spider-Man Icon" class="zoomable-image" id="spiderManImage">
+                </div>
+                
+                <div class="attribution">
+                    Comic Panel: <a href="https://readcomiconline.li/Comic/The-Amazing-Spider-Man-2018" target="_blank">The Amazing Spider-Man (2018)</a><br>
+                    Movie Clip: <a href="https://youtu.be/7r93JmbVFo8?si=o8gKVpnf1inFJ3NO&t=59" target="_blank">Spider-Man 3 (2007) Movie Clip on YouTube</a><br>
+                    3D Model: <a href="https://sketchfab.com/3d-models/spiderman-fullyrigged-2a093a11c3ad40d18cdb5885fd48047b" target="_blank">Spiderman (FullyRigged) by CrazyPandaDesigns on Sketchfab</a><br>
+                    Spider-Man Image: <a href="https://character-level.fandom.com/wiki/Spider-Man_(Marvel_Comics)" target="_blank">Character Level Fandom Wiki</a>
+                </div>
+            </div>
+        </div>
 
+        <!-- Slide 3: Content Examples (was slide 9) -->
+        <div class="slide" id="slide-backup-3">
+            <div class="slide-content">
+               
+                <p><span class="emph">creators already express their content in a variety of forms</span></br>
+                GenAI is rapidly expanding and accelerating this capability</p>
+                
+                <div class="example-container visible" style="display: flex; flex-direction: column; align-items: center; margin: 2rem auto 0; max-width: 1200px;">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%;">
+                        <!-- 3D to 2D Example -->
+                        <div style="width: 30%; background-color: white; padding: 1.2rem; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); margin-bottom: 1rem; display: flex; flex-direction: column;">
+                            <h3 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.2rem;">3D model → 2D Rendering</h3>
+                            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-grow: 1;">
+                                <img src="https://discover.therookies.co/content/images/size/w1000/2021/02/Blockout.png" alt="3D Model" style="width: 48%; height: 150px; border-radius: 5px; box-shadow: 0 3px 8px rgba(0,0,0,0.2); object-fit: cover;">
+                                <img src="media/final-render.png" alt="2D Image" style="width: 48%; height: 150px; border-radius: 5px; box-shadow: 0 3px 8px rgba(0,0,0,0.2); object-fit: cover;">
+                            </div>
+                        </div>
+                        
+                        <!-- Speech to Text Example -->
+                        <div style="width: 30%; background-color: white; padding: 1.2rem; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); margin-bottom: 1rem; display: flex; flex-direction: column;">
+                            <h3 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.2rem;">Speech ↔ Text</h3>
+                            <div style="display: flex; align-items: center; justify-content: center; flex-grow: 1; height: 150px;">
+                                <img src="https://birdeye.com/blog/wp-content/uploads/speech-to-text-1024x535.jpg" alt="Speech to Text Conversion" style="width: 100%; height: 100%; border-radius: 5px; box-shadow: 0 3px 8px rgba(0,0,0,0.2); object-fit: cover;">
+                            </div>
+                        </div>
+                        
+                        <!-- Gen AI Example -->
+                        <div style="width: 30%; background-color: white; padding: 1.2rem; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); margin-bottom: 1rem; display: flex; flex-direction: column;">
+                            <h3 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.2rem;">Text → Images / Video</h3>
+                            <div style="display: flex; align-items: center; justify-content: center; flex-grow: 1; height: 150px;">
+                                <img src="https://cdn.mos.cms.futurecdn.net/8ojNmKsuDQZaytbyqNz8H4-1200-80.jpg" alt="Generative AI Text to Image" style="width: 100%; height: 100%; border-radius: 5px; box-shadow: 0 3px 8px rgba(0,0,0,0.2); object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="attribution" style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.7; text-align: center;">
+                        3D/2D: <a href="https://discover.therookies.co/2021/05/03/how-to-create-a-pixar-style-3d-scene/" target="_blank">The Rookies</a> | 
+                        Speech-to-Text: <a href="https://birdeye.com/blog/speech-to-text-software/" target="_blank">BirdEye</a> | 
+                        Gen AI: <a href="https://www.adobe.com/" target="_blank">Adobe</a>
+                    </div>
+                </div>
+
+                <p>Automatic conversion will help, creators will also want precise expressive control</p>
+
+            </div>
+        </div>
     </div>
-</div> 
+    
+    <div class="navigation" id="navigation">
+        <!-- Navigation dots will be added here dynamically -->
+    </div>
+    
+    <!-- Spider-Man Modal -->
+    <div id="spiderManModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <div class="carousel-container">
+            <!-- Spider-Man slides will be dynamically added here -->
+            <div class="carousel-nav carousel-prev">&#10094;</div>
+            <div class="carousel-nav carousel-next">&#10095;</div>
+            <div class="carousel-dots"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Variables
+            const presentation = document.getElementById('presentation');
+            const slides = document.querySelectorAll('.slide');
+            const navigation = document.getElementById('navigation');
+            const progressBar = document.getElementById('progressBar');
+            let currentSlide = 0;
+            
+            // Initialize navigation dots
+            function initNavigation() {
+                for (let i = 0; i < slides.length; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('nav-dot');
+                    if (i === currentSlide) {
+                        dot.classList.add('active');
+                    }
+                    dot.addEventListener('click', () => goToSlide(i));
+                    navigation.appendChild(dot);
+                }
+                updateProgressBar();
+            }
+            
+            // Go to specific slide
+            function goToSlide(index) {
+                if (index < 0) index = 0;
+                if (index >= slides.length) index = slides.length - 1;
+                
+                slides[currentSlide].classList.remove('active');
+                slides[index].classList.add('active');
+                
+                const dots = document.querySelectorAll('.nav-dot');
+                dots[currentSlide].classList.remove('active');
+                dots[index].classList.add('active');
+                
+                currentSlide = index;
+                updateProgressBar();
+                
+                // Trigger animations for the current slide
+                if (currentSlide === 0) {
+                    animateFlipCards();
+                } else if (currentSlide === 1) {
+                    // Setup Spider-Man image click handler
+                    setupSpiderManModal();
+                }
+            }
+            
+            // Update progress bar
+            function updateProgressBar() {
+                const progress = ((currentSlide) / (slides.length - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            
+            // Animate flip cards
+            function animateFlipCards() {
+                const flipCards = document.querySelectorAll('.flip-card');
+                flipCards.forEach((card, index) => {
+                    // Reset card state
+                    card.classList.remove('visible', 'flipped');
+                    
+                    // Clone to remove existing event listeners
+                    const newCard = card.cloneNode(true);
+                    card.parentNode.replaceChild(newCard, card);
+                    
+                    // Add fresh event listener
+                    newCard.addEventListener('click', function() {
+                        this.classList.toggle('flipped');
+                    });
+                    
+                    // Animate visibility
+                    setTimeout(() => {
+                        newCard.classList.add('visible');
+                    }, 300 * index);
+                });
+            }
+            
+            // Setup Spider-Man modal
+            function setupSpiderManModal() {
+                const spiderManImage = document.getElementById('spiderManImage');
+                if (spiderManImage) {
+                    spiderManImage.addEventListener('click', function() {
+                        const spiderManModal = document.getElementById('spiderManModal');
+                        spiderManModal.style.display = 'block';
+                        spiderManCurrentSlide = 0;
+                        createSpiderManSlides();
+                    });
+                }
+            }
+            
+            // Next slide
+            function nextSlide() {
+                goToSlide(currentSlide + 1);
+            }
+            
+            // Previous slide
+            function prevSlide() {
+                goToSlide(currentSlide - 1);
+            }
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                // Only handle keyboard navigation when modal is NOT open
+                const modals = document.querySelectorAll('.modal');
+                let modalOpen = false;
+                modals.forEach(modal => {
+                    if (modal.style.display === 'block') {
+                        modalOpen = true;
+                    }
+                });
+                
+                if (!modalOpen) {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        nextSlide();
+                    } else if (e.key === 'ArrowLeft') {
+                        prevSlide();
+                    }
+                }
+            });
+            
+            // Arrow navigation
+            const prevArrow = document.getElementById('prevArrow');
+            const nextArrow = document.getElementById('nextArrow');
+            
+            if (prevArrow && nextArrow) {
+                prevArrow.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    prevSlide();
+                });
+                
+                nextArrow.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    nextSlide();
+                });
+            }
+            
+            // Initialize
+            initNavigation();
+            animateFlipCards(); // Animate first slide
+            
+            // Spider-Man modal functionality
+            const spiderManFormats = [
+                {
+                    title: 'Comic Book',
+                    type: 'image',
+                    content: 'https://2.bp.blogspot.com/N47nE_TgXMu1Lf9IkL8SAFKkey9er790JVhzfAWjKpn1ey3GbxeBhBjgkcB14iKLb2XDaC2LsR2GA0hWs0Z9-i9KoqpJq3DZjuZdGipt6WqgzQfPS3ZRYvM7bklLf7oiMla-HBMXkw=s0',
+                    caption: 'Spider-Man first appeared in a comic book in 1963'
+                },
+                {
+                    title: 'Movies',
+                    type: 'iframe',
+                    content: 'https://www.youtube.com/embed/7r93JmbVFo8?start=59&autoplay=1&mute=1&enablejsapi=1',
+                    caption: 'Spider-Man has appeared in film since 1977',
+                    id: 'spiderManVideo'
+                },
+                {
+                    title: '3D Models',
+                    type: 'iframe',
+                    content: 'https://sketchfab.com/models/2a093a11c3ad40d18cdb5885fd48047b/embed?autostart=1&ui_controls=1&ui_infos=1',
+                    caption: ''
+                }
+            ];
+
+            let spiderManCurrentSlide = 0;
+
+            // Function to create Spider-Man carousel slides
+            function createSpiderManSlides() {
+                const carouselContainer = document.querySelector('#spiderManModal .carousel-container');
+                const carouselDots = document.querySelector('#spiderManModal .carousel-dots');
+                
+                // Clear existing slides
+                const existingSlides = carouselContainer.querySelectorAll('.carousel-slide');
+                existingSlides.forEach(slide => slide.remove());
+                
+                // Clear existing dots
+                carouselDots.innerHTML = '';
+                
+                // Create new slides and dots
+                spiderManFormats.forEach((format, index) => {
+                    // Create slide
+                    const slide = document.createElement('div');
+                    slide.classList.add('carousel-slide');
+                    slide.dataset.slideIndex = index;
+                    if (index === spiderManCurrentSlide) {
+                        slide.classList.add('active');
+                    }
+                    
+                    // Create content based on type
+                    let content;
+                    if (format.type === 'iframe') {
+                        content = document.createElement('iframe');
+                        content.src = format.content;
+                        
+                        if (format.title === 'Movies') {
+                            content.style.width = '80%';
+                            content.style.height = '70vh';
+                            content.style.maxHeight = '600px';
+                        } else if (format.title === '3D Models') {
+                            content.style.width = '90%';
+                            content.style.height = '75vh';
+                            content.style.maxHeight = '700px';
+                        } else {
+                            content.style.width = '90%';
+                            content.style.height = '65vh';
+                        }
+                        
+                        content.style.borderRadius = '8px';
+                        content.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.15)';
+                        content.frameBorder = '0';
+                        content.allow = 'autoplay; fullscreen; vr';
+                        content.mozallowfullscreen = 'true';
+                        content.webkitallowfullscreen = 'true';
+                        
+                        if (format.id) {
+                            content.id = format.id;
+                        }
+                    } else if (format.type === 'image') {
+                        content = document.createElement('img');
+                        content.src = format.content;
+                        content.classList.add('carousel-image');
+                        content.alt = format.title;
+                        content.style.maxHeight = '70vh';
+                        content.style.maxWidth = '80%';
+                        content.style.objectFit = 'contain';
+                    }
+                    
+                    // Create title
+                    const title = document.createElement('h3');
+                    title.textContent = format.title;
+                    title.style.color = 'white';
+                    title.style.marginBottom = '15px';
+                    title.style.fontSize = '2.2rem';
+                    
+                    // Create caption
+                    const caption = document.createElement('div');
+                    caption.classList.add('carousel-caption');
+                    caption.textContent = format.caption;
+                    caption.style.fontSize = '1.6rem';
+                    caption.style.maxWidth = '80%';
+                    caption.style.margin = '20px auto 0 auto';
+                    
+                    // Add to slide
+                    slide.appendChild(title);
+                    slide.appendChild(content);
+                    slide.appendChild(caption);
+                    
+                    // Insert slide before the navigation buttons
+                    const prevNav = carouselContainer.querySelector('.carousel-prev');
+                    carouselContainer.insertBefore(slide, prevNav);
+                    
+                    // Create dot
+                    const dot = document.createElement('div');
+                    dot.classList.add('carousel-dot');
+                    if (index === spiderManCurrentSlide) {
+                        dot.classList.add('active');
+                    }
+                    dot.addEventListener('click', () => goToSpiderManSlide(index));
+                    carouselDots.appendChild(dot);
+                });
+            }
+
+            // Function to show a specific Spider-Man slide
+            function goToSpiderManSlide(index) {
+                if (spiderManCurrentSlide === 1 && index !== 1) {
+                    stopSpiderManVideo();
+                }
+                
+                spiderManCurrentSlide = index;
+                
+                const slides = document.querySelectorAll('#spiderManModal .carousel-slide');
+                slides.forEach((slide, i) => {
+                    if (i === index) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+                
+                const dots = document.querySelectorAll('#spiderManModal .carousel-dot');
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            // Function to stop the Spider-Man video
+            function stopSpiderManVideo() {
+                const videoFrame = document.getElementById('spiderManVideo');
+                if (videoFrame) {
+                    const currentSrc = videoFrame.src;
+                    videoFrame.src = '';
+                    videoFrame.src = currentSrc;
+                }
+            }
+
+            // Function to go to next Spider-Man slide
+            function nextSpiderManSlide() {
+                let next = spiderManCurrentSlide + 1;
+                if (next >= spiderManFormats.length) {
+                    next = 0;
+                }
+                goToSpiderManSlide(next);
+            }
+
+            // Function to go to previous Spider-Man slide
+            function prevSpiderManSlide() {
+                let prev = spiderManCurrentSlide - 1;
+                if (prev < 0) {
+                    prev = spiderManFormats.length - 1;
+                }
+                goToSpiderManSlide(prev);
+            }
+
+            // Setup Spider-Man modal close functions
+            function setupSpiderManModalClose() {
+                const spiderManModal = document.getElementById('spiderManModal');
+                const modalClose = document.querySelector('#spiderManModal .modal-close');
+                const carouselPrev = document.querySelector('#spiderManModal .carousel-prev');
+                const carouselNext = document.querySelector('#spiderManModal .carousel-next');
+                
+                if (carouselPrev && carouselNext) {
+                    carouselPrev.addEventListener('click', prevSpiderManSlide);
+                    carouselNext.addEventListener('click', nextSpiderManSlide);
+                }
+                
+                if (modalClose) {
+                    modalClose.addEventListener('click', function() {
+                        spiderManModal.style.display = 'none';
+                        stopSpiderManVideo();
+                    });
+                }
+                
+                window.addEventListener('click', function(event) {
+                    if (event.target === spiderManModal) {
+                        spiderManModal.style.display = 'none';
+                        stopSpiderManVideo();
+                    }
+                });
+                
+                document.addEventListener('keydown', function(event) {
+                    if (spiderManModal.style.display === 'block') {
+                        if (event.key === 'ArrowLeft') {
+                            prevSpiderManSlide();
+                            event.stopPropagation();
+                        } else if (event.key === 'ArrowRight') {
+                            nextSpiderManSlide();
+                            event.stopPropagation();
+                        } else if (event.key === 'Escape') {
+                            spiderManModal.style.display = 'none';
+                            stopSpiderManVideo();
+                            event.stopPropagation();
+                        }
+                    }
+                });
+            }
+
+            // Initialize Spider-Man modal functionality
+            setupSpiderManModalClose();
+        });
+    </script>
+</body>
+</html> 

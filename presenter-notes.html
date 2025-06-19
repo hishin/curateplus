@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presenter Script - Future of Media</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            font-size: 20px;
+            color: #333;
+            position: relative;
+        }
+        .section {
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid #007acc;
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .bullet-point {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        .emphasis {
+            font-weight: bold;
+            color: #d73502;
+            font-size: 1.1em;
+        }
+        .transition {
+            text-align: center;
+            font-size: 2em;
+            margin: 2rem 0;
+            color: #666;
+        }
+        .quote {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #e8f4fd;
+            border-left: 4px solid #007acc;
+            font-style: italic;
+            font-size: 1.05em;
+        }
+        h1 {
+            text-align: center;
+            color: #007acc;
+            margin-bottom: 2rem;
+        }
+        h2 {
+            color: #007acc;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            z-index: 1000;
+        }
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: #007acc;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .nav-btn:hover {
+            background: #005c99;
+        }
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .slide-counter {
+            font-size: 1rem;
+            color: #666;
+            margin: 0 1rem;
+        }
+        .slide-number {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #007acc;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .slide-title {
+            font-weight: bold;
+            color: #007acc;
+            margin-bottom: 1rem;
+            font-size: 1.2em;
+        }
+        .keyboard-shortcuts {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .transition-marker {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 2rem 0;
+            color: #666;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h3>Presenter Script - Future of Media</h3>
+
+    <div class="keyboard-shortcuts">
+        Keyboard shortcuts:<br>
+        ← Previous slide<br>
+        → Next slide<br>
+        Home First slide<br>
+        End Last slide
+    </div>
+
+    <div class="section active" data-slide="1">
+        <div class="slide-number">Slide 1</div>
+        <div class="slide-title">Introduction</div>
+        <p>Hi, I'm Valentina from STORIE Lab, and together with Élie Michel from the Paris Lab, we want to talk about imagining the future of media. We'll touch on three related but distinct ideas:</p>
+        <div class="bullet-point">
+            • Transformable media<br>
+            • interactive media<br>
+            • And some observations about trends in media and creativity
+        </div>
+        <p>Let's begin.</p>
+    </div>
+
+    <div class="section" data-slide="2">
+        <div class="slide-number">Slide 2</div>
+        <div class="slide-title">Changes in Media Creation</div>
+        <p>Recently, we've seen big shifts in how we create media.<br>
+        We hear narratives like:</p>
+        
+        <div class="quote">
+            "More change, more quickly, than possibly ever before in history."<br>
+            "The next wave is here."<br>
+            "Pandora's box has opened."
+        </div>
+        
+        <p>These stories are familiar to us — those of us working in the creative industries and building creative tools. But I want to highlight a contrast:<br>
+        On the consumer side, we've seen relatively small changes in what we create.</p>
+        
+        <p>We still create documents, images, videos, and audio — and most of it is consumed passively: reading, listening, viewing.</p>
+    </div>
+
+    <div class="section" data-slide="3">
+        <div class="slide-number">Slide 3</div>
+        <div class="slide-title">Historical Perspective</div>
+        <p>I want to draw an analogy here — to a fascinating comic strip I came across from about 100 years ago, predicting the "newspaper of the future."</p>
+        
+        <p>Let's take a closer look.<br>
+        It says:</p>
+        <div class="bullet-point">
+            • Newspapers of the future won't contain less reading material, but the pages will be smaller.
+        </div>
+        
+        <p>That maps to bite-sized content today.</p>
+        
+        <div class="bullet-point">
+            • Editions will come out every hour.
+        </div>
+        
+        <p>Sounds like real-time publishing, right?</p>
+        
+        <div class="bullet-point">
+            • Circulation will be wider.
+        </div>
+        
+        <p>Again, true — content is distributed more globally than ever.</p>
+    </div>
+
+    <div class="section" data-slide="4">
+        <div class="slide-number">Slide 4</div>
+        <div class="slide-title">Key Questions</div>
+        <p>But I want to draw your attention to the last panel:<br>
+        The reader says, "Isn't this great? I can use both hands to eat now!"</p>
+        
+        <p>And the final line is:</p>
+        <div class="quote">
+            "The competitor of the newspaper will be the graphophone."
+        </div>
+
+        <div class="transition-marker"></div>
+        
+        <p class="emphasis">So the question I want to ask is:<br>
+        What is the new medium that enables consumers to do something different, not just faster?</p>
+        
+        <p class="emphasis">Can we imagine new types of media and experiences that meaningfully change how people engage?</p>
+    </div>
+
+    <div class="section" data-slide="5">
+        <div class="slide-number">Slide 5</div>
+        <div class="slide-title">Cross-Modal Media</div>
+        <p>We want to propose a few related — but distinct — ideas:</p>
+        <div class="bullet-point">
+            • First, cross-modal media — content that can be experienced in multiple forms.<br>
+            • Then, interactive media — like video games, but broader.
+        </div>
+        
+        <p>If you think about it, content is already published in multiple forms.<br>
+        As researchers, we write papers, create project videos, and maybe even write blog posts about our work.<br>
+        Advertisers produce the same campaign in multiple formats.<br>
+        And social media creators make long YouTube videos, short Reels, TikToks, and so on.</p>
+    </div>
+
+    <div class="section" data-slide="6">
+        <div class="slide-number">Slide 6</div>
+        <div class="slide-title">Current Limitations</div>
+        <p>But right now, creators author in a single format, and manually convert or re-author into others.<br>
+        Meanwhile, consumers engage with media in one format at a time, with no explicit link between them.</p>
+        
+        <p class="emphasis">So the question I want to ask is:<br>
+        Can we enable creators to author content in multiple forms — with ease and precision?<br>
+        And in turn, can we enable consumers to shift between forms seamlessly?</p>
+        
+        <p>In some sense, I'm not proposing something entirely new — I'm proposing we separate content from form.</p>
+    </div>
+
+    <div class="section" data-slide="7">
+        <div class="slide-number">Slide 7</div>
+        <div class="slide-title">Existing Examples</div>
+        <p>This idea exists in other domains:</p>
+        <div class="bullet-point">
+            • Mira reminded me of CSS Zen Garden, which is one example.<br>
+            • PowerPoint templates are another.<br>
+            • And there are countless more examples where content is styled or reshaped dynamically.
+        </div>
+        
+        <p>What I'm suggesting is that we take this idea further — and invest in technologies and interfaces that support semantic content authoring.</p>
+    </div>
+
+    <div class="section" data-slide="8">
+        <div class="slide-number">Slide 8</div>
+        <div class="slide-title">Current Interface Limitations</div>
+        <p>When I open Adobe Express today, the first screen I see asks:</p>
+        
+        <p>What's the size of your content — square, landscape, portrait?<br>
+        What's the type — presentation, flyer, video, Instagram post?</p>
+        
+        <p>But what if we move away from format-first interfaces, and instead enable creators to focus on the semantics of their content?</p>
+    </div>
+
+    <div class="section" data-slide="9">
+        <div class="slide-number">Slide 9</div>
+        <div class="slide-title">Research Opportunities</div>
+        <p>Let me walk through a few research opportunities — I'll use examples from the domain I know best, which is video. But I invite you to think about similar challenges in your own domains.</p>
+        
+        <p>First, we need new media representations that support semantic authoring.</p>
+        
+        <p>Many of you may remember Project Blink, which is close to my heart.<br>
+        One key feature we introduced was the transcript panel, which let users edit video by content, instead of frame by frame.</p>
+    </div>
+
+    <div class="section" data-slide="10">
+        <div class="slide-number">Slide 10</div>
+        <div class="slide-title">Future Vision</div>
+        <p>Now I think we can go further:<br>
+        How do we encode even higher-level semantics — like storyline, character, mood, or narrative structure?</p>
+        
+        <p>This connects directly to training vision-language models with a deeper semantic understanding of media.</p>
+        
+        <p>Eventually, we want to empower creators to author with high-level intent.<br>
+        Imagine saying:</p>
+        
+        <div class="quote">
+            "Make this scene more romantic."<br>
+            "Add tension here."
+        </div>
+        
+        <p>This kind of interaction requires models that truly understand media content beyond surface features.</p>
+    </div>
+
+    <div class="section" data-slide="11">
+        <div class="slide-number">Slide 11</div>
+        <div class="slide-title">Cross-Modal Generation</div>
+        <p>Third, I want to highlight the importance of cross-modal generation and transformation.</p>
+        
+        <p>This isn't entirely new — we've been doing it for decades:</p>
+        <div class="bullet-point">
+            • In film production, we render 3D scenes into 2D imagery.<br>
+            • We've used speech-to-text, text-to-speech, and now increasingly, text-to-image and text-to-video technologies.
+        </div>
+        
+        <p>Generative AI is accelerating this space — making modality transformation faster, more powerful, and more accessible. This kind of technology will enable creators to express their content in the modality that makes the most sense for their message, audience, and intent.</p>
+    </div>
+
+    <div class="section" data-slide="12">
+        <div class="slide-number">Slide 12</div>
+        <div class="slide-title">Consumer Experience</div>
+        <p>On the consumption side, we've also explored transformations — like turning a video into a hierarchical document, or converting a document into an audiovisual slideshow.</p>
+        
+        <p class="emphasis">So again, I ask:</p>
+        <div class="bullet-point">
+            • What technologies can we develop to empower consumers to experience content in the form that best fits their needs, preferences, or context?
+        </div>
+    </div>
+
+    <div class="section" data-slide="13">
+        <div class="slide-number">Slide 13</div>
+        <div class="slide-title">Interactive Media Future</div>
+        <p>And when this becomes possible, we begin to unlock new forms of interactive media.</p>
+        
+        <p>Think of interactive films like Bandersnatch on Netflix, where viewers can choose how the story unfolds.</p>
+        
+        <p>Or imagine a future where a TV episode could be dynamically customized to emphasize a viewer's favorite character, while still preserving the overall plot.</p>
+        
+        <p class="emphasis">But this also raises important questions about control and authorship:<br>
+        Can we strike a balance where creators retain artistic vision and narrative quality, while still giving viewers a meaningful degree of personalization?</p>
+    </div>
+
+    <div class="section" data-slide="14">
+        <div class="slide-number">Slide 14</div>
+        <div class="slide-title">Blended Experiences</div>
+        <p>Finally, I want us to imagine more blended experiences — hybrid forms of media.</p>
+        
+        <p>We've seen this before — a decade ago, Wil and Mira explored mixed-media tutorials for software learning.</p>
+        
+        <p>While preparing this talk, I came across a product called VIP advertising — VIP stands for "Video in Paper."<br>
+        It's a printed magazine with a tiny embedded video screen — literally mixing physical and digital media.</p>
+        
+        <p class="emphasis">So I leave you with this final question:<br>
+        What other kinds of mixed media could we invent — that expand the imagination of both creators and consumers?</p>
+    </div>
+
+    <div class="section" data-slide="15">
+        <div class="slide-number">Slide 15</div>
+        <div class="slide-title">Conclusion</div>
+        <p>Thank you so much for listening.</p>
+        
+        <p>Now I'll hand it over to Élie to talk more about interactive media.</p>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="prevSlide()">← Previous</button>
+        <span class="slide-counter">Slide <span id="currentSlide">1</span> of <span id="totalSlides">0</span></span>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 1;
+        const slides = document.querySelectorAll('.section');
+        const totalSlides = slides.length;
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function updateSlideVisibility() {
+            slides.forEach((slide, index) => {
+                if (index + 1 === currentSlideIndex) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            document.getElementById('currentSlide').textContent = currentSlideIndex;
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 1;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < totalSlides) {
+                currentSlideIndex++;
+                updateSlideVisibility();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 1) {
+                currentSlideIndex--;
+                updateSlideVisibility();
+            }
+        }
+
+        function goToSlide(slideNumber) {
+            if (slideNumber >= 1 && slideNumber <= totalSlides) {
+                currentSlideIndex = slideNumber;
+                updateSlideVisibility();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            switch (e.key) {
+                case 'ArrowRight':
+                    nextSlide();
+                    break;
+                case 'ArrowLeft':
+                    prevSlide();
+                    break;
+                case 'Home':
+                    goToSlide(1);
+                    break;
+                case 'End':
+                    goToSlide(totalSlides);
+                    break;
+            }
+        });
+
+        updateSlideVisibility();
+    </script>
+</body>
+</html> 
