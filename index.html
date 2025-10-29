@@ -1337,6 +1337,47 @@
         
         /* Attribution styles */
         
+        /* Title slide gradient background */
+        #slide1 {
+            background: linear-gradient(135deg, #b3deff 0%, #0D66D0 100%) !important;
+        }
+        
+        #slide1 .slide-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            gap: 1rem;
+        }
+        
+        #slide1 h1 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 2rem;
+        }
+        
+        #slide1 .slide-subtitle {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        #slide1 .slide-info {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+            font-style: italic;
+        }
+        
+        #slide1 .slide-date {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+        
         /* Specific styling for slide 7 cards */
         #slide7 .card-container {
             display: flex;
@@ -1368,10 +1409,83 @@
 
 
 
+        /* Password protection overlay */
+        #password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
 
+        #password-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 400px;
+        }
+
+        #password-box h2 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        #password-box input {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 1rem 0;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        #password-box button {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #password-box button:hover {
+            background: var(--secondary);
+        }
+
+        #password-error {
+            color: #d32f2f;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            min-height: 1.5rem;
+        }
+
+        .content-hidden {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
+    <!-- Password Protection Overlay -->
+    <div id="password-overlay">
+        <div id="password-box">
+            <h2>🔒 Protected Content</h2>
+            <p>Please enter the passphrase to view this presentation</p>
+            <input type="password" id="password-input" placeholder="Enter passphrase" autocomplete="off" />
+            <button onclick="checkPassword()">Submit</button>
+            <div id="password-error"></div>
+        </div>
+    </div>
+
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
@@ -1385,23 +1499,11 @@
         
         <!-- Slide 1: Title -->
         <div class="slide active" id="slide1">
-            <div class="slide-content split-layout">
-                <!-- Left side: Title, authors, and venue information -->
-                <div class="split-left">
-                    <h1>Imagining the Future of Media</h1>
-                    <p class="slide-subtitle">Valentina Shin (STORIE Lab), Élie Michel (Paris Lab)</p>
-                    <p class="slide-info">Long term Research Strategy meeting</p>
-                    <p class="slide-date">San Jose, CA. June 19-20, 2025</p>
-                </div>
-                
-                <!-- Right side: Key Messages -->
-                <div class="split-right">
-                    <div class="agenda-list">
-                        <div class="agenda-subitem">Transformable media</div>
-                        <div class="agenda-subitem">Interactive media</div>
-                        <div class="agenda-subitem">Trends in Creativity</div>
-                    </div>
-                </div>
+            <div class="slide-content">
+                <h1>Imagining the Future of Media</h1>
+                <p class="slide-subtitle">Valentina Shin (STORIE Lab)</p>
+                <p class="slide-info">Long term Research Strategy meeting</p>
+                <p class="slide-date">presented at San Jose, CA. June 19-20, 2025</p>
             </div>
         </div>
        
@@ -3789,6 +3891,47 @@
             }
         });
 
+        // ============================================
+        // Password Protection
+        // ============================================
+        const CORRECT_PASSWORD = "curate2025"; // Change this to your desired password!
+
+        // Hide main content initially
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if already authenticated in this session
+            if (sessionStorage.getItem('authenticated') === 'true') {
+                document.getElementById('password-overlay').style.display = 'none';
+                document.querySelector('.presentation').classList.remove('content-hidden');
+            } else {
+                document.querySelector('.presentation').classList.add('content-hidden');
+                document.getElementById('password-input').focus();
+            }
+        });
+
+        function checkPassword() {
+            const input = document.getElementById('password-input');
+            const error = document.getElementById('password-error');
+            
+            if (input.value === CORRECT_PASSWORD) {
+                // Correct password
+                sessionStorage.setItem('authenticated', 'true');
+                document.getElementById('password-overlay').style.display = 'none';
+                document.querySelector('.presentation').classList.remove('content-hidden');
+                error.textContent = '';
+            } else {
+                // Wrong password
+                error.textContent = '❌ Incorrect passphrase. Please try again.';
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('password-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
 
     </script>
 </body>
